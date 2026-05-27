@@ -1,0 +1,134 @@
+@model ApprenticeshipManagement.ViewModels.AdminDashboardViewModel
+@{
+    ViewData["Title"] = "Administrator Panel";
+}
+
+<div class="admin-panel">
+    <div class="admin-panel-header card-soft p-4 mb-4">
+        <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
+            <h1 class="admin-panel-title mb-0">Administrator Panel</h1>
+            <form asp-controller="Account" asp-action="Logout" method="post">
+                @Html.AntiForgeryToken()
+                <button type="submit" class="btn btn-admin-logout">Logout</button>
+            </form>
+        </div>
+    </div>
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success">@TempData["Success"]</div>
+    }
+
+    <div class="card-soft p-4 mb-4">
+        <div class="row align-items-center g-4">
+            <div class="col-md-4">
+                <div class="admin-profile d-flex align-items-center gap-3">
+                    <div class="admin-avatar">&#128100;</div>
+                    <div>
+                        <h4 class="mb-0">@Model.AdminName</h4>
+                        <p class="text-subtle mb-0">System Administrator</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="row g-3">
+                    <div class="col-sm-4">
+                        <div class="stat-card">
+                            <div class="stat-label">Total Apprentices</div>
+                            <div class="stat-value">@Model.TotalApprentices</div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="stat-card">
+                            <div class="stat-label">Active Apprentices</div>
+                            <div class="stat-value text-success">@Model.ActiveApprentices</div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="stat-card">
+                            <div class="stat-label">Inactive Apprentices</div>
+                            <div class="stat-value text-danger">@Model.InactiveApprentices</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-soft p-4">
+        <h3 class="manage-title mb-3">Manage Apprentices</h3>
+
+        <form asp-action="Index" method="get" class="admin-search-row mb-4">
+            <input type="text" name="search" value="@Model.SearchQuery" class="form-control"
+                   placeholder="Search by name, ID, or trade..." />
+            <button type="submit" class="btn btn-admin-search">Search</button>
+        </form>
+
+        <div class="table-responsive">
+            <table class="table admin-table mb-0">
+                <thead>
+                    <tr>
+                        <th>Apprentice ID</th>
+                        <th>Full Name</th>
+                        <th>Trade/Field</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (!Model.Apprentices.Any())
+                    {
+                        <tr>
+                            <td colspan="7" class="text-center text-subtle py-4">
+                                No apprentices found. Run demo SQL in MySQL Workbench or register new apprentices.
+                            </td>
+                        </tr>
+                    }
+                    else
+                    {
+                        @foreach (var a in Model.Apprentices)
+                        {
+                            <tr>
+                                <td>@a.ApprenticeId</td>
+                                <td>@a.FullName</td>
+                                <td>@a.TradeField</td>
+                                <td>@a.Email</td>
+                                <td>@a.Phone</td>
+                                <td>
+                                    @if (a.IsActive)
+                                    {
+                                        <span class="status-active">Active</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="status-inactive">Inactive</span>
+                                    }
+                                </td>
+                                <td>
+                                    <div class="admin-actions">
+                                        <a asp-action="ViewApprentice" asp-route-id="@a.Id" class="btn btn-action-view">View</a>
+                                        <a asp-action="EditApprentice" asp-route-id="@a.Id" class="btn btn-action-edit">Edit</a>
+                                        <form asp-action="ToggleStatus" method="post" class="d-inline">
+                                            @Html.AntiForgeryToken()
+                                            <input type="hidden" name="id" value="@a.Id" />
+                                            @if (a.IsActive)
+                                            {
+                                                <button type="submit" class="btn btn-action-deactivate">Deactivate</button>
+                                            }
+                                            else
+                                            {
+                                                <button type="submit" class="btn btn-action-activate">Activate</button>
+                                            }
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

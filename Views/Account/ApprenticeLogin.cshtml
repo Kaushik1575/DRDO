@@ -1,0 +1,60 @@
+@model ApprenticeshipManagement.ViewModels.ApprenticeLoginViewModel
+@{
+    ViewData["Title"] = "Apprenticeship Login";
+}
+
+<div class="auth-wrapper">
+    <div class="auth-card auth-card-apprentice">
+        <div class="auth-header text-center mb-4">
+            <span class="badge bg-primary mb-2">Apprenticeship</span>
+            <h2 class="auth-title">Apprenticeship Login</h2>
+            <p class="text-muted">Sign in to your apprentice portal</p>
+        </div>
+
+        @if (TempData["Success"] != null)
+        {
+            <div class="alert alert-success">@TempData["Success"]</div>
+        }
+
+        <form asp-action="ApprenticeLogin" method="post" novalidate>
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+            <div class="mb-3">
+                <label asp-for="Email" class="form-label"></label>
+                <input asp-for="Email" class="form-control" placeholder="name@example.com" autofocus />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="ApprenticeId" class="form-label"></label>
+                <input asp-for="ApprenticeId" class="form-control" placeholder="e.g. APP-2026-001" />
+                <span asp-validation-for="ApprenticeId" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="ApprenticeshipPassword" class="form-label"></label>
+                <input asp-for="ApprenticeshipPassword" class="form-control" placeholder="Enter Apprenticeship Password" />
+                <span asp-validation-for="ApprenticeshipPassword" class="text-danger"></span>
+            </div>
+
+            <div class="mb-4 form-check">
+                <input asp-for="RememberMe" class="form-check-input" />
+                <label asp-for="RememberMe" class="form-check-label"></label>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100">Login as Apprenticeship</button>
+        </form>
+
+        <p class="text-center mt-3 mb-0">
+            New apprenticeship member?
+            <a asp-action="ApprenticeRegister">Register here</a>
+        </p>
+        <p class="text-center mt-2 mb-0 small">
+            <a asp-controller="Home" asp-action="Index">Back to Home</a>
+        </p>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

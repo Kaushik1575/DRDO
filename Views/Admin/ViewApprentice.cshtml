@@ -1,0 +1,37 @@
+@{
+    var a = ViewBag.Apprentice as ApprenticeshipManagement.Models.Apprentice;
+    ViewData["Title"] = "View Apprentice";
+}
+
+@if (a == null)
+{
+    <p>Apprentice not found.</p>
+}
+else
+{
+    <div class="admin-panel">
+        <div class="card-soft p-4">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2 class="mb-0">Apprentice Details</h2>
+                <a asp-action="Index" class="btn btn-outline-secondary">Back to Panel</a>
+            </div>
+
+            <div class="row g-3">
+                <div class="col-md-6"><strong>Apprentice ID:</strong> @a.ApprenticeId</div>
+                <div class="col-md-6"><strong>Full Name:</strong> @a.FullName</div>
+                <div class="col-md-6"><strong>Trade/Field:</strong> @a.Department</div>
+                <div class="col-md-6"><strong>Email:</strong> @a.Email</div>
+                <div class="col-md-6"><strong>Phone:</strong> @a.MobileNumber</div>
+                <div class="col-md-6">
+                    <strong>Status:</strong>
+                    @(a.IsActive ? "Active" : "Inactive")
+                </div>
+                <div class="col-md-6"><strong>Registered On:</strong> @a.CreatedAt.ToString("dd MMM yyyy")</div>
+            </div>
+
+            <div class="mt-4">
+                <a asp-action="EditApprentice" asp-route-id="@a.Id" class="btn btn-action-edit">Edit</a>
+            </div>
+        </div>
+    </div>
+}
