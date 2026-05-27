@@ -21,7 +21,7 @@
 
             <div class="mb-3">
                 <label asp-for="Email" class="form-label"></label>
-                <input asp-for="Email" class="form-control" placeholder="admin@drdo.gov.in" autofocus />
+                <input asp-for="Email" class="form-control" placeholder="admin@example.com" autofocus />
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
 
@@ -39,9 +39,12 @@
             <button type="submit" class="btn btn-danger w-100">Login as Admin</button>
         </form>
 
+        <div class="d-grid gap-2 mt-3">
+            <a asp-action="AdminRegister" class="btn btn-outline-danger">Admin Register</a>
+        </div>
         <p class="text-center mt-3 mb-0">
             New admin?
-            <a asp-action="AdminRegister">Register here</a>
+            <a asp-action="AdminRegister">Create account</a>
         </p>
         <p class="text-center mt-2 mb-0 small">
             <a asp-controller="Home" asp-action="Index">Back to Home</a>
