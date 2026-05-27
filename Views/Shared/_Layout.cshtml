@@ -11,68 +11,90 @@
 </head>
 <body class="page-bg">
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light glass-nav sticky-top">
+        <div class="app-header">
             <div class="container-lg">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Apprenticeship Portal</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        @if (User.Identity?.IsAuthenticated == true)
-                        {
-                            @if (User.IsInRole("Admin"))
-                            {
+                <div class="header-content d-flex align-items-center justify-content-between">
+                    <div class="header-brand d-flex align-items-center gap-3">
+                        <img src="/images/drdo-logo.png" alt="DRDO Logo" class="drdo-logo-sm">
+                        <div>
+                            <h1 class="header-title">Apprenticeship Management System</h1>
+                            <p class="header-tagline">Skill Today, Success Tomorrow</p>
+                        </div>
+                    </div>
+                    <nav class="navbar navbar-expand-lg navbar-dark ms-auto">
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                                aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="navbar-collapse collapse">
+                            <ul class="navbar-nav ms-auto gap-1">
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-controller="Admin" asp-action="Index">Admin Panel</a>
+                                    <a class="nav-link" asp-controller="Home" asp-action="Index">
+                                        <i class="bi bi-house"></i> Home
+                                    </a>
                                 </li>
-                            }
-                            else
-                            {
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-controller="Apprentice" asp-action="Index">Apprenticeship Panel</a>
+                                    <a class="nav-link" href="#about">
+                                        <i class="bi bi-info-circle"></i> About
+                                    </a>
                                 </li>
-                            }
-                        }
-                    </ul>
-                    <ul class="navbar-nav">
-                        @if (User.Identity?.IsAuthenticated == true)
-                        {
-                            <li class="nav-item">
-                                <span class="nav-link text-dark">Hello, @User.Identity.Name</span>
-                            </li>
-                            <li class="nav-item">
-                                <form asp-controller="Account" asp-action="Logout" method="post" class="d-inline">
-                                    @Html.AntiForgeryToken()
-                                    <button type="submit" class="btn btn-link nav-link text-dark">Logout</button>
-                                </form>
-                            </li>
-                        }
-                        else
-                        {
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle text-dark" href="#" data-bs-toggle="dropdown">Admin</a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" asp-controller="Account" asp-action="AdminLogin">Admin Login</a></li>
-                                    <li><a class="dropdown-item" asp-controller="Account" asp-action="AdminRegister">Admin Register</a></li>
-                                </ul>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle text-dark" href="#" data-bs-toggle="dropdown">Apprentice</a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" asp-controller="Account" asp-action="ApprenticeLogin">Apprentice Login</a></li>
-                                    <li><a class="dropdown-item" asp-controller="Account" asp-action="ApprenticeRegister">Apprentice Register</a></li>
-                                </ul>
-                            </li>
-                        }
-                    </ul>
+                                @if (User.Identity?.IsAuthenticated == false)
+                                {
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i class="bi bi-briefcase"></i> Admin
+                                        </a>
+                                        <ul class="dropdown-menu dropdown-menu-end">
+                                            <li><a class="dropdown-item" asp-controller="Account" asp-action="AdminLogin">Admin Login</a></li>
+                                            <li><a class="dropdown-item" asp-controller="Account" asp-action="AdminRegister">Admin Register</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i class="bi bi-person"></i> Apprentice
+                                        </a>
+                                        <ul class="dropdown-menu dropdown-menu-end">
+                                            <li><a class="dropdown-item" asp-controller="Account" asp-action="ApprenticeLogin">Apprentice Login</a></li>
+                                            <li><a class="dropdown-item" asp-controller="Account" asp-action="ApprenticeRegister">Apprentice Register</a></li>
+                                        </ul>
+                                    </li>
+                                }
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#contact">
+                                        <i class="bi bi-envelope"></i> Contact
+                                    </a>
+                                </li>
+                                @if (User.Identity?.IsAuthenticated == true)
+                                {
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i class="bi bi-person-circle"></i> @User.Identity.Name
+                                        </a>
+                                        <ul class="dropdown-menu dropdown-menu-end">
+                                            @if (User.IsInRole("Admin"))
+                                            {
+                                                <li><a class="dropdown-item" asp-controller="Admin" asp-action="Index">Admin Panel</a></li>
+                                            }
+                                            else
+                                            {
+                                                <li><a class="dropdown-item" asp-controller="Apprentice" asp-action="Index">Apprenticeship Panel</a></li>
+                                            }
+                                            <li><hr class="dropdown-divider"></li>
+                                            <li>
+                                                <form asp-controller="Account" asp-action="Logout" method="post" class="d-inline">
+                                                    @Html.AntiForgeryToken()
+                                                    <button type="submit" class="dropdown-item text-danger">Logout</button>
+                                                </form>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                    </nav>
                 </div>
             </div>
-        </nav>
+        </div>
     </header>
     <div class="container-lg app-container">
         <main role="main" class="pb-3">

@@ -6,9 +6,10 @@
 <div class="auth-wrapper">
     <div class="auth-card auth-card-apprentice">
         <div class="auth-header text-center mb-4">
+            <img src="/images/drdo-logo.png" alt="DRDO Logo" class="drdo-logo-form">
             <span class="badge bg-primary mb-2">Apprenticeship</span>
-            <h2 class="auth-title">Apprenticeship Login</h2>
-            <p class="text-muted">Sign in to your apprentice portal</p>
+            <h2 class="auth-title">Welcome Back!</h2>
+            <p class="text-muted">Login to your apprenticeship portal</p>
         </div>
 
         @if (TempData["Success"] != null)
@@ -20,41 +21,56 @@
             <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
 
             <div class="mb-3">
-                <label asp-for="Email" class="form-label"></label>
-                <input asp-for="Email" class="form-control" placeholder="name@example.com" autofocus />
+                <label asp-for="Email" class="form-label">Email Address</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+                    <input asp-for="Email" class="form-control" placeholder="name@example.com" autofocus />
+                </div>
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
 
             <div class="mb-3">
-                <label asp-for="ApprenticeId" class="form-label"></label>
-                <input asp-for="ApprenticeId" class="form-control" placeholder="e.g. APP-2026-001" />
+                <label asp-for="ApprenticeId" class="form-label">Apprenticeship ID</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-card-text"></i></span>
+                    <input asp-for="ApprenticeId" class="form-control" placeholder="e.g. APP-2026-001" />
+                </div>
                 <span asp-validation-for="ApprenticeId" class="text-danger"></span>
             </div>
 
             <div class="mb-3">
-                <label asp-for="ApprenticeshipPassword" class="form-label"></label>
-                <input asp-for="ApprenticeshipPassword" class="form-control" placeholder="Enter Apprenticeship Password" />
+                <label asp-for="ApprenticeshipPassword" class="form-label">Password</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-lock"></i></span>
+                    <input asp-for="ApprenticeshipPassword" class="form-control" type="password" />
+                </div>
                 <span asp-validation-for="ApprenticeshipPassword" class="text-danger"></span>
             </div>
 
             <div class="mb-4 form-check">
                 <input asp-for="RememberMe" class="form-check-input" />
-                <label asp-for="RememberMe" class="form-check-label"></label>
+                <label asp-for="RememberMe" class="form-check-label">Remember me</label>
             </div>
 
-            <button type="submit" class="btn btn-primary w-100">Login as Apprenticeship</button>
+            <button type="submit" class="btn btn-primary w-100">
+                <i class="bi bi-box-arrow-in-right"></i> Login
+            </button>
         </form>
 
-        <p class="text-center mt-3 mb-0">
-            New apprenticeship member?
-            <a asp-action="ApprenticeRegister">Register here</a>
+        <div class="divider-text mt-4">or</div>
+
+        <div class="d-grid gap-2">
+            <a asp-action="AdminLogin" class="btn btn-outline-primary">
+                <i class="bi bi-briefcase"></i> Login as Admin
+            </a>
+        </div>
+
+        <p class="text-center mt-4 mb-0">
+            Don't have an account? 
+            <a asp-action="ApprenticeRegister" class="text-primary fw-bold">Register here</a>
         </p>
         <p class="text-center mt-2 mb-0 small">
-            <a asp-controller="Home" asp-action="Index">Back to Home</a>
+            <a asp-controller="Home" asp-action="Index" class="text-muted">Back to Home</a>
         </p>
     </div>
 </div>
-
-@section Scripts {
-    <partial name="_ValidationScriptsPartial" />
-}

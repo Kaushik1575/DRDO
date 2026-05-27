@@ -6,65 +6,92 @@
 <div class="auth-wrapper">
     <div class="auth-card auth-card-apprentice">
         <div class="auth-header text-center mb-4">
+            <img src="/images/drdo-logo.png" alt="DRDO Logo" class="drdo-logo-form">
             <span class="badge bg-primary mb-2">Apprenticeship</span>
-            <h2 class="auth-title">Apprenticeship Registration</h2>
-            <p class="text-muted">Create your apprentice account</p>
+            <h2 class="auth-title">Create Apprenticeship Account</h2>
+            <p class="text-muted">Fill in the details to register</p>
         </div>
 
         <form asp-action="ApprenticeRegister" method="post" novalidate>
             <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
 
-            <div class="mb-3">
-                <label asp-for="FullName" class="form-label"></label>
-                <input asp-for="FullName" class="form-control" placeholder="Enter full name" />
-                <span asp-validation-for="FullName" class="text-danger"></span>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="FullName" class="form-label">Full Name</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-person"></i></span>
+                        <input asp-for="FullName" class="form-control" placeholder="Full Name" />
+                    </div>
+                    <span asp-validation-for="FullName" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Email" class="form-label">Email Address</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+                        <input asp-for="Email" class="form-control" placeholder="Email Address" />
+                    </div>
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="EmployeeId" class="form-label">Apprenticeship ID</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-card-text"></i></span>
+                        <input asp-for="EmployeeId" class="form-control" placeholder="e.g. APP-2026-001" />
+                    </div>
+                    <span asp-validation-for="EmployeeId" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label asp-for="MobileNumber" class="form-label">Phone Number</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-telephone"></i></span>
+                        <input asp-for="MobileNumber" class="form-control" placeholder="+91 98765 43210" />
+                    </div>
+                    <span asp-validation-for="MobileNumber" class="text-danger"></span>
+                </div>
             </div>
 
             <div class="mb-3">
-                <label asp-for="Email" class="form-label"></label>
-                <input asp-for="Email" class="form-control" placeholder="name@example.com" />
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
-
-            <div class="mb-3">
-                <label asp-for="EmployeeId" class="form-label"></label>
-                <input asp-for="EmployeeId" class="form-control" placeholder="e.g. APP-2026-001" />
-                <span asp-validation-for="EmployeeId" class="text-danger"></span>
-            </div>
-
-            <div class="mb-3">
-                <label asp-for="Department" class="form-label"></label>
+                <label asp-for="Department" class="form-label">Department</label>
                 <input asp-for="Department" class="form-control" placeholder="e.g. Electronics" />
                 <span asp-validation-for="Department" class="text-danger"></span>
             </div>
 
-            <div class="mb-3">
-                <label asp-for="MobileNumber" class="form-label"></label>
-                <input asp-for="MobileNumber" class="form-control" placeholder="+91 98765 43210" />
-                <span asp-validation-for="MobileNumber" class="text-danger"></span>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Password" class="form-label">Password</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-lock"></i></span>
+                        <input asp-for="Password" class="form-control" type="password" />
+                    </div>
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label asp-for="ConfirmPassword" class="form-label">Confirm Password</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-lock-check"></i></span>
+                        <input asp-for="ConfirmPassword" class="form-control" type="password" />
+                    </div>
+                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                </div>
             </div>
 
-            <div class="mb-3">
-                <label asp-for="Password" class="form-label"></label>
-                <input asp-for="Password" class="form-control" placeholder="Create Apprenticeship Password" />
-                <span asp-validation-for="Password" class="text-danger"></span>
-            </div>
-
-            <div class="mb-4">
-                <label asp-for="ConfirmPassword" class="form-label"></label>
-                <input asp-for="ConfirmPassword" class="form-control" placeholder="Re-enter Apprenticeship Password" />
-                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-            </div>
-
-            <button type="submit" class="btn btn-primary w-100">Register as Apprenticeship</button>
+            <button type="submit" class="btn btn-primary w-100 mt-3">
+                <i class="bi bi-person-plus"></i> Register
+            </button>
         </form>
 
-        <p class="text-center mt-3 mb-0">
-            Already registered?
-            <a asp-action="ApprenticeLogin">Apprenticeship Login</a>
+        <p class="text-center mt-4 mb-0">
+            Already have an account? 
+            <a asp-action="ApprenticeLogin" class="text-primary fw-bold">Login here</a>
         </p>
         <p class="text-center mt-2 mb-0 small">
-            <a asp-controller="Home" asp-action="Index">Back to Home</a>
+            <a asp-controller="Home" asp-action="Index" class="text-muted">Back to Home</a>
         </p>
     </div>
 </div>

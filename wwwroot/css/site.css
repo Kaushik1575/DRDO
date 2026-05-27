@@ -229,13 +229,13 @@ body.page-bg > * {
 
 .auth-card {
   width: 100%;
-  max-width: 480px;
-  padding: 2.5rem;
-  border-radius: 18px;
+  max-width: 650px;
+  padding: 3rem;
+  border-radius: 20px;
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(15px);
-  border: 1px solid rgba(255, 255, 255, 0.8);
-  box-shadow: 0 20px 60px rgba(0, 40, 90, 0.12), inset 0 1px 1px rgba(255, 255, 255, 0.8);
+  border: 2px solid rgba(13, 110, 253, 0.1);
+  box-shadow: 0 20px 60px rgba(0, 40, 90, 0.15), inset 0 1px 1px rgba(255, 255, 255, 0.8);
   transition: all 0.3s ease;
 }
 
@@ -256,6 +256,48 @@ body.page-bg > * {
   font-size: 0.95rem;
 }
 
+.drdo-logo-form {
+  width: 90px;
+  height: 90px;
+  object-fit: contain;
+  margin-bottom: 1rem;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.divider-text {
+  text-align: center;
+  color: var(--drdo-subtle);
+  font-weight: 600;
+  font-size: 0.9rem;
+  position: relative;
+}
+
+.divider-text::before,
+.divider-text::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 40%;
+  height: 1px;
+  background: var(--drdo-border);
+}
+
+.divider-text::before {
+  left: 0;
+}
+
+.divider-text::after {
+  right: 0;
+}
+
+.input-group-text {
+  background: rgba(255, 255, 255, 0.6);
+  border: 1.5px solid #dbe6f0;
+  color: var(--drdo-subtle);
+}
+
 .badge {
   border-radius: 20px;
   font-weight: 600;
@@ -269,6 +311,24 @@ body.page-bg > * {
   padding: 4rem 2rem 3rem;
   max-width: 1000px;
   margin: 0 auto;
+}
+
+.landing-hero-with-logo {
+  position: relative;
+  isolation: isolate;
+}
+
+.landing-hero-with-logo::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("/images/drdo-logo.png");
+  background-repeat: no-repeat;
+  background-position: center 60%;
+  background-size: 550px 550px;
+  opacity: 0.12;
+  z-index: -1;
+  pointer-events: none;
 }
 
 .landing-hero h1,
@@ -582,6 +642,86 @@ body.page-bg > * {
   font-weight: 700;
   color: var(--drdo-ink);
   margin-bottom: 0.5rem;
+}
+
+/* App Header Styles */
+.app-header {
+  background: linear-gradient(135deg, #0b2a4a 0%, #1a4d7a 100%);
+  color: white;
+  padding: 1.5rem 0;
+  box-shadow: 0 4px 20px rgba(0, 40, 90, 0.15);
+}
+
+.header-content {
+  padding: 0 1rem;
+}
+
+.drdo-logo-sm {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+}
+
+.header-brand div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.header-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin: 0;
+  color: white;
+  letter-spacing: 0.3px;
+}
+
+.header-tagline {
+  font-size: 0.85rem;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+.app-header .navbar .nav-link {
+  color: white !important;
+  font-weight: 600;
+  padding: 0.5rem 1rem !important;
+  transition: all 0.3s ease;
+}
+
+.app-header .navbar .nav-link:hover {
+  color: #64c8ff !important;
+  transform: translateY(-2px);
+}
+
+.app-header .dropdown-menu {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(13, 110, 253, 0.15);
+  box-shadow: 0 12px 40px rgba(0, 40, 90, 0.15);
+  border-radius: 12px;
+  margin-top: 0.5rem;
+}
+
+.app-header .dropdown-item {
+  color: var(--drdo-ink);
+  font-weight: 500;
+  padding: 0.65rem 1rem;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.app-header .dropdown-item:hover {
+  background: rgba(13, 110, 253, 0.08);
+  color: #0d6efd;
+  padding-left: 1.25rem;
+}
+
+.app-header .dropdown-item.text-danger:hover {
+  background: rgba(220, 53, 69, 0.08);
+  color: #dc3545;
 }
 
 /* Mobile responsiveness */
